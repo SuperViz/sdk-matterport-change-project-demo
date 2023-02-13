@@ -1,7 +1,7 @@
-import { supervizSdk } from "./modules/superviz/supervizSdk.js"
+import { supervizSdk, isIphone } from "./modules/superviz/supervizSdk.js"
 import { changeContent, matterportSdk } from './modules/matterport/matterportSdk.js'
+
 const CONTENT_SYNC_PROPERTY = "content";
-let changedContent = false;
 let matterportPluginInstance = null;
 const iframeMeetingSettings = document.getElementById("sv-video-frame");
 
@@ -10,12 +10,16 @@ let currentContent;
 let myParticipant;
 let participantList = []
 
+
 // verify if meeting settings iframe is loaded
 iframeMeetingSettings.addEventListener("load", function() {
     document.getElementById("loader-ms").style.display = "none";
 });
 
 function loadPlugin() {
+    
+    if(isIphone()) return;
+
     const plugin = new window.MatterportPlugin(matterportSdk);
     matterportPluginInstance = supervizSdk.loadPlugin(plugin, {
         avatarConfig: {
@@ -25,7 +29,7 @@ function loadPlugin() {
         },
         isAvatarsEnabled: true,
         isLaserEnabled: true,
-        isNameEnabled: false
+        isNameEnabled: true
     });
 }
 
@@ -93,11 +97,18 @@ document.getElementById('collapsedButton').onclick = function () {
 // send change content sync
 const syncContent = function (newModelSid) {
     supervizSdk.setSyncProperty(CONTENT_SYNC_PROPERTY, newModelSid);
+
+    if(newModelSid === currentContent) return;
+
+    changeContent(newModelSid);
+    currentContent = newModelSid;
 }
 
 // receive change content sync
 supervizSdk.subscribe(CONTENT_SYNC_PROPERTY, function (newModelSid) {
-    if(newModelSid === currentContent) return;
+    if(newModelSid === currentContent) {
+        return;
+    };
     
     if (matterportPluginInstance) { // disconnect from plugin if there is one
         supervizSdk.unloadPlugin();

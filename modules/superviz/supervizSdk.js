@@ -18,4 +18,14 @@ export const supervizSdk = await SuperVizSdk.init(DEVELOPER_KEY, {
     roomId: roomId,
     defaultAvatars: true,
     enableFollow: true,
+    enableGoTo: true,
+    enableGather: true,
 });
+
+
+// is iphone helper
+export const isIphone = () => {
+    if (typeof window === `undefined` || typeof navigator === `undefined`) return false;
+
+    return /iPhone/i.test(navigator.userAgent || navigator.vendor || (window.opera && opera.toString() === `[object Opera]`));
+};
