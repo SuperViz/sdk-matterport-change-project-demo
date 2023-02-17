@@ -113,7 +113,6 @@ supervizSdk.subscribe(CONTENT_SYNC_PROPERTY, function (newModelSid) {
     if (matterportPluginInstance) { // disconnect from plugin if there is one
         supervizSdk.unloadPlugin();
         matterportPluginInstance = null;
-        changedContent = true;
     }
 
     
