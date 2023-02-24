@@ -4,6 +4,7 @@ const url = new URL(document.URL);
 let userName = url.searchParams.get('user-name');
 let roomId = url.searchParams.get('roomId');
 let userType = url.searchParams.get('user-type');
+export const myParticipantId = Date.now().toPrecision(20);
 
 export const supervizSdk = await SuperVizSdk.init(DEVELOPER_KEY, {
     group: {
@@ -11,7 +12,7 @@ export const supervizSdk = await SuperVizSdk.init(DEVELOPER_KEY, {
         name: "<GROUP-NAME>"
     },
     participant: {
-        id: Date.now().toPrecision(20),
+        id: myParticipantId,
         name: userName ? userName : undefined,
         type: userType,
     },
@@ -20,6 +21,10 @@ export const supervizSdk = await SuperVizSdk.init(DEVELOPER_KEY, {
     enableFollow: true,
     enableGoTo: true,
     enableGather: true,
+    debug: true,
+    camsOff: false,
+    screenshareOff: false,
+    shouldKickParticipantsOnHostLeave: true,
 });
 
 
