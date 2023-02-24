@@ -1,6 +1,6 @@
 const MATTERPORT_KEY = "<MATTERPORT_DEVELOPER_KEY>";
 import { isIphone } from '../superviz/supervizSdk.js';
-import { onContentChanged } from './../../index.js'
+import { onContentChanged } from '../../index'
 
 export let matterportSdk;
 
@@ -10,7 +10,7 @@ export const changeContent = async (content) => {
 }
 
 
-async function buildMatterportIframe(content) { 
+async function buildMatterportIframe(content) {
     let showcase = document.createElement('iframe')
 
     const container = document.getElementById('sectionReady')
@@ -52,7 +52,7 @@ function buildUrl (content) {
     return url.toString()
 }
 
-function destroyMatterportIframe() { 
+function destroyMatterportIframe() {
     matterportSdk?.disconnect();
     const showcase = document.getElementById('showcase')
     if (!showcase) return
@@ -67,12 +67,12 @@ function destroyMatterportIframe() {
             resolve()
         }, 1000)
         }, 1000)
-    })   
+    })
 }
 
 
-async function onShowcaseLoad() { 
-    const iframe = document.getElementById('showcase');    
+async function onShowcaseLoad() {
+    const iframe = document.getElementById('showcase');
     const MP_SDK = isIphone() ? window.MP_SDK : iframe.contentWindow.MP_SDK;
 
     try {
