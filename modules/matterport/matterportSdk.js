@@ -1,6 +1,6 @@
 const MATTERPORT_KEY = "<MATTERPORT_DEVELOPER_KEY>";
 import { isIphone } from '../superviz/supervizSdk.js';
-import { onContentChanged } from '../../index'
+import { onContentChanged } from '../../index.js'
 
 export let matterportSdk;
 
