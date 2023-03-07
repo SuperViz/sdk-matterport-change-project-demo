@@ -17,7 +17,9 @@
 </head>
 
 <body>
-
+    <sv-modal>
+        <sv-modal-copy-link/>
+      </sv-modal>
 	<div id="container">
 	</div>
 	<div id="wrapper" class="wrapper" id="info">
@@ -47,6 +49,8 @@
 					<div id="collapsedButton" class="collapse-button">
 						<button class="img-button">
 						</button>
+					</div>
+					<div id="collapsedButtonInvite" class="collapse-button-invite opened">
 					</div>
 				</div>
 				<div class="demo">
@@ -94,10 +98,12 @@
 	</main>
 	</body>
 <style>
+	#collapsedButtonInvite {
+		display: flex;
+	}
 	main {
 		width: 100%;
 		height: 100%;
-
 		background-color: color('sv-color-purple-gray-80');
 	}
 
@@ -123,7 +129,22 @@
 		background-size: 18px;
 		background-image: url(https://production.cdn.superviz.com/static/copy-icon.svg);
 	}
-
+	section.hidden .collapse-button-invite {
+		margin-top: 85px;
+		border-radius: 20px;
+		cursor: pointer;
+		border: 0px;
+		background-repeat: no-repeat;
+		width: 34px;
+		height: 34px;
+		background-position: center;
+		background-color: #E9E5EF;		
+		left: 8px;
+		position: absolute;
+		background-size: 18px;
+		background-position-x: 10px;
+		background-image: url(https://production.cdn.superviz.com/static/sdk-invite-icon.svg);
+	}
 	.img-button {
 		border: 0px;
 	}
