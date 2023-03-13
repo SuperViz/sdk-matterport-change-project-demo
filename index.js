@@ -179,6 +179,10 @@ supervizSdk.subscribe(SuperVizSdk.MeetingEvent.MY_PARTICIPANT_JOINED, (participa
         document.getElementsByClassName('project-name')[3].classList.remove('active');
         document.getElementById('toTRYzoAMdT').getElementsByClassName('project-name')[0].classList.add('active');
     };
+
+    amplitude.track("Enter example", {
+      exampleName: "matterport-change-project-demo",
+    });
 });
 
 supervizSdk.subscribe(SuperVizSdk.MeetingEvent.MEETING_PARTICIPANT_LIST_UPDATE, (participants) => {
