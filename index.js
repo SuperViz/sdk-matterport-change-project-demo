@@ -17,13 +17,13 @@ let sweeps = {};
 
 
 // verify if meeting settings iframe is loaded
-iframeMeetingSettings.addEventListener("load", function() {
+iframeMeetingSettings.addEventListener("load", function () {
     document.getElementById("loader-ms").style.display = "none";
 });
 
 function loadPlugin() {
 
-    if(isIphone()) {
+    if (isIphone()) {
         subscribeToMatterportCameraEvent();
         subscribeToMatterportSweepEvent();
         return;
@@ -45,8 +45,11 @@ function loadPlugin() {
 // interface buttons to open close
 document.getElementById('collapsedButton').onclick = function () {
     if (document.getElementById('sectionReady').classList.contains('hidden')) {
+        document.getElementById('collapsedButtonInvite').style.display = 'none';
         return document.getElementById('sectionReady').classList.toggle('hidden')
     }
+    document.getElementById('collapsedButtonInvite').style.display = "block";
+
     document.getElementById('sectionReady').classList.add('hidden');
 };
 
@@ -54,7 +57,7 @@ document.getElementById('collapsedButton').onclick = function () {
 const syncContent = function (newModelSid) {
     supervizSdk.setSyncProperty(CONTENT_SYNC_PROPERTY, newModelSid);
 
-    if(newModelSid === currentContent) return;
+    if (newModelSid === currentContent) return;
 
     changeContent(newModelSid);
     currentContent = newModelSid;
@@ -62,7 +65,7 @@ const syncContent = function (newModelSid) {
 
 // received matterport loaded new content
 export const onContentChanged = () => {
-    if(matterportPluginInstance) {
+    if (matterportPluginInstance) {
         supervizSdk.unloadPlugin(); // disconnect plugin
     }
 
@@ -109,11 +112,11 @@ const moveToSweep = (sweepId, rotation = { x: 0, y: 0 }) => {
     })
 }
 const onPositionsChange = (payload) => {
-    positions = {...payload};
+    positions = { ...payload };
     checkFollowParticipant();
 }
 const onSweepsChange = (payload) => {
-    sweeps = {...payload};
+    sweeps = { ...payload };
     checkFollowParticipant();
 }
 const goToPosition = (participantId) => {
@@ -128,7 +131,7 @@ supervizSdk.subscribe(POSITIONS_SYNC_PROPERTY, onPositionsChange);
 supervizSdk.subscribe(SWEEPS_SYNC_PROPERTY, onSweepsChange);
 
 supervizSdk.subscribe(CONTENT_SYNC_PROPERTY, function (newModelSid) {
-    if(newModelSid === currentContent) {
+    if (newModelSid === currentContent) {
         return;
     }
 
@@ -188,11 +191,11 @@ supervizSdk.subscribe(SuperVizSdk.MeetingEvent.MY_PARTICIPANT_JOINED, (participa
 supervizSdk.subscribe(SuperVizSdk.MeetingEvent.MEETING_PARTICIPANT_LIST_UPDATE, (participants) => {
     const isHost = participants.find(participant => participant?.id === myParticipant?.id)?.isHost;
 
-    if(participants.length === 1 && !participantList.length) {
+    if (participants.length === 1 && !participantList.length) {
         syncContent('v4LWLiLDm3s');
     }
 
-    if(participantList.length < participants.length && isHost)  {
+    if (participantList.length < participants.length && isHost) {
         syncContent(currentContent);
     }
 
