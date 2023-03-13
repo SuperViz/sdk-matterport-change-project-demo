@@ -48,6 +48,8 @@ function buildUrl (content) {
     url.searchParams.set('qs', 0)
     url.searchParams.set('log', 0)
     url.searchParams.set('newtags', 1)
+    url.searchParams.set('search', 0)
+    url.searchParams.set('title', 0)
 
     return url.toString()
 }
